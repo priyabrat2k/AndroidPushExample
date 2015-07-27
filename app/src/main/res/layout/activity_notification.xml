@@ -16,4 +16,13 @@
         android:layout_centerVertical="true"
         android:text="Data" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:text="www.appifiedtech.com"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>
