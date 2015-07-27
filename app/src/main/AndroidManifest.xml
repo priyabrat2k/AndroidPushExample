@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.appifiedtech.push.example.main" >
+
+    <!-- To be able to access Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- To wakeup processor from sleeping while Notification arrive -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- To access Network state -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- To getAccount details for GCM reg -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- To register in GCM and get back regId Token -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- Custom permission to prevent other Apps to receive GCM Notification -->
+    <permission
+        android:name="com.appifiedtech.push.example.main.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- Use the custom permission -->
+    <uses-permission android:name="com.appifiedtech.push.example.main.permission.C2D_MESSAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/title_activity_notification" >
+        </activity>
+        <!-- Google Library Receiver to handle Message sent from GCM Server -->
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- needs permission to receive messages from GCM -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- For supporting Pre KITKAT Devices -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.appified.forum.main" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.appifiedtech.push.example.main.MyInstanceIDListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.appifiedtech.push.example.main.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.appifiedtech.push.example.main.MyGcmRegistrationService"
+            android:exported="false" />
+    </application>
+
+</manifest>
