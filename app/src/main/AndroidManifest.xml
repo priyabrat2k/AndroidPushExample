@@ -70,9 +70,6 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        <service
-            android:name="com.appifiedtech.push.example.main.MyGcmRegistrationService"
-            android:exported="false" />
     </application>
 
 </manifest>
